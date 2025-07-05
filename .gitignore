@@ -1,0 +1,42 @@
+# Node dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+client/build/
+server/dist/
+
+# Logs
+client/npm-debug.log*
+server/npm-debug.log*
+*.log
+
+# dotenv environment files
+client/.env
+server/.env
+
+# OS & IDE files
+.DS_Store
+*.swp
+*.swo
+*.swn
+*.sublime-workspace
+*.sublime-project
+.vscode/
+.idea/
+
+# Test coverage
+client/coverage/
+server/coverage/
+
+# Parcel / Vite cache (if ever used)
+.client-cache/
+server/.cache/
+
+# Optional: lock file for Yarn or PNPM if you’re using only npm
+yarn.lock
+pnpm-lock.yaml
+
+# macOS metadata
+Icon?
