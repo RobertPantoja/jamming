@@ -1,24 +1,14 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 
+import "./App.css";
 import SearchBar from "../Searchbar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 
+import mockSearchResults from "../../mocks/mockSearchResults";
+
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("/api/hello")
-      .then((response) => response.json())
-      .then((data) => {
-        setMessage(data.message);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
+  const [searchResults, setSearchResults] = useState(mockSearchResults);
   return (
     <div>
       <h1>
@@ -27,7 +17,7 @@ function App() {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults />
+          <SearchResults searchResults={searchResults} />
           <Playlist />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import "./Track.css";
 
-function Track() {
-  function renderAction(isRemoval) {
+function Track({ track, isRemoval }) {
+  function renderAction() {
     // Logic to render + or - button based on track's presence in the playlist
     if (isRemoval) {
       return <button className="Track-action">-</button>;
@@ -13,8 +13,10 @@ function Track() {
   return (
     <div className="Track">
       <div className="Track-information">
-        <h3>{/* <!-- track name --> */}</h3>
-        <p>{/* <!-- track artist --> | <!-- track album --> */}</p>
+        <h3>{track.name}</h3>
+        <p>
+          {track.artist} | {track.album}
+        </p>
       </div>
       {renderAction()}
     </div>

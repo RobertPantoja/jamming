@@ -1,9 +1,16 @@
 import "./TrackList.css";
+import Track from "../Track/Track";
 
-function TrackList() {
+function TrackList({ tracks = [] }) {
   return (
     <div className="TrackList">
-      {/* <!--  Map method that renders a set of Tracks  --> */}
+      {tracks.map((track) => (
+        <Track
+          key={track.id} // Assuming each track has a unique id
+          track={track}
+          isRemoval={false} // Assuming this is a search result, not a playlist
+        />
+      ))}
     </div>
   );
 }
