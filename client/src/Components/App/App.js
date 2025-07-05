@@ -11,7 +11,15 @@ import mockPlaylistTracks from "../../mocks/mockPlaylistTracks";
 function App() {
   const [playlistName, setPlaylistName] = useState("My Playlist Name");
   const [searchResults, setSearchResults] = useState(mockSearchResults);
-  const [playlistTracks, setPlatlistTracks] = useState(mockPlaylistTracks);
+  const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
+
+  function addTrack(track) {
+    if (playlistTracks.find(savedTack => savedTack.id === track.id)) {
+      return;
+    } else {
+      setPlaylistTracks((playlistTracks) => [...playlistTracks, track]);
+    }
+  }
 
   return (
     <div>
@@ -21,7 +29,7 @@ function App() {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults searchResults={searchResults} />
+          <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
             playlistName={playlistName}
             playlistTracks={playlistTracks}

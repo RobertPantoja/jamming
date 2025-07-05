@@ -1,14 +1,15 @@
 import "./TrackList.css";
 import Track from "../Track/Track";
 
-function TrackList({ tracks = [] }) {
+function TrackList({ tracks = [], isRemoval, onAdd }) {
   return (
     <div className="TrackList">
       {tracks.map((track) => (
         <Track
-          key={track.id} // Assuming each track has a unique id
+          key={track.id}
           track={track}
-          isRemoval={false} // Assuming this is a search result, not a playlist
+          isRemoval={isRemoval}
+          onAdd={onAdd}
         />
       ))}
     </div>

@@ -1,13 +1,20 @@
 import "./Track.css";
 
-function Track({ track, isRemoval }) {
+function Track({ track, isRemoval, onAdd }) {
   function renderAction() {
-    // Logic to render + or - button based on track's presence in the playlist
     if (isRemoval) {
       return <button className="Track-action">-</button>;
     } else {
-      return <button className="Track-action">+</button>;
+      return (
+        <button className="Track-action" onClick={addTrack}>
+          +
+        </button>
+      );
     }
+  }
+
+  function addTrack() {
+    onAdd(track)
   }
 
   return (
