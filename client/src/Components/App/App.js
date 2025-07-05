@@ -22,8 +22,12 @@ function App() {
   }
 
   function removeTrack(track) {
-    const filteredTracks = playlistTracks.filter(t => t.id != track.id)
+    const filteredTracks = playlistTracks.filter(t => t.id !== track.id)
     setPlaylistTracks(filteredTracks)
+  }
+
+  function updatePlaylistName (name) {
+    setPlaylistName(name)
   }
 
   return (
@@ -39,6 +43,7 @@ function App() {
             playlistName={playlistName}
             playlistTracks={playlistTracks}
             onRemove={removeTrack}
+            onNameChange={updatePlaylistName}
           />
         </div>
       </div>
