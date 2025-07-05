@@ -1,6 +1,6 @@
 import "./TrackList.css";
 
-function TrackList({}) {
+function TrackList() {
   return (
     <div className="TrackList">
       {/* <!--  Map method that renders a set of Tracks  --> */}
