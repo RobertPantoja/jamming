@@ -21,6 +21,11 @@ function App() {
     }
   }
 
+  function removeTrack(track) {
+    const filteredTracks = playlistTracks.filter(t => t.id != track.id)
+    setPlaylistTracks(filteredTracks)
+  }
+
   return (
     <div>
       <h1>
@@ -33,6 +38,7 @@ function App() {
           <Playlist
             playlistName={playlistName}
             playlistTracks={playlistTracks}
+            onRemove={removeTrack}
           />
         </div>
       </div>

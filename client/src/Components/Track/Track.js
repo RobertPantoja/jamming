@@ -1,9 +1,9 @@
 import "./Track.css";
 
-function Track({ track, isRemoval, onAdd }) {
+function Track({ track, isRemoval, onAdd, onRemove }) {
   function renderAction() {
     if (isRemoval) {
-      return <button className="Track-action">-</button>;
+      return <button className="Track-action" onClick={removeTrack}>-</button>;
     } else {
       return (
         <button className="Track-action" onClick={addTrack}>
@@ -15,6 +15,10 @@ function Track({ track, isRemoval, onAdd }) {
 
   function addTrack() {
     onAdd(track)
+  }
+
+  function removeTrack() {
+    onRemove(track)
   }
 
   return (
