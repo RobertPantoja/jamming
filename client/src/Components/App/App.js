@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 import SearchBar from "../Searchbar/SearchBar";
+import SearchResults from "../SearchResults/SearchResults";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -25,7 +26,7 @@ function App() {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          {/* <!-- SearchResults component --> */}
+          <SearchResults />
           {/* <!-- Playlist component --> */}
         </div>
       </div>
