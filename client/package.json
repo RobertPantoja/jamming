@@ -2,6 +2,7 @@
   "name": "spotify",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:3010/",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -32,8 +33,10 @@
     ],
     "development": [
       "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 firefox version"
     ]
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^5.2.2"
   }
 }

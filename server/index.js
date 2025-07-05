@@ -1,9 +1,10 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3010;
 
 app.use(cors({ origin: "http://127.0.0.1:3000" }));
+
 app.use(express.json());
 
 app.get("/api/hello", (req, res) => {
