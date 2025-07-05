@@ -1,6 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 
+import SearchBar from "../Searchbar/SearchBar";
+
 function App() {
   const [message, setMessage] = useState("");
 
@@ -21,7 +23,7 @@ function App() {
         Ja<span className="highlight">mm</span>ing
       </h1>
       <div className="App">
-        {/* <!-- SearchBar component --> */}
+        <SearchBar />
         <div className="App-playlist">
           {/* <!-- SearchResults component --> */}
           {/* <!-- Playlist component --> */}
