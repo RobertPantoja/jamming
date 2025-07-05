@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import SearchBar from "../Searchbar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
+import Playlist from "../Playlist/Playlist";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -27,7 +28,7 @@ function App() {
         <SearchBar />
         <div className="App-playlist">
           <SearchResults />
-          {/* <!-- Playlist component --> */}
+          <Playlist />
         </div>
       </div>
     </div>
