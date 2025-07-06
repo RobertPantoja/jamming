@@ -36,13 +36,17 @@ function App() {
     console.log(trackURIs);
   }
 
+  function search(term) {
+    console.log(term)
+  }
+
   return (
     <div>
       <h1>
         Ja<span className="highlight">mm</span>ing
       </h1>
       <div className="App">
-        <SearchBar />
+        <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
