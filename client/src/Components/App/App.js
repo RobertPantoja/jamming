@@ -7,7 +7,6 @@ import Playlist from "../Playlist/Playlist";
 
 import mockSearchResults from "../../mocks/mockSearchResults";
 import mockPlaylistTracks from "../../mocks/mockPlaylistTracks";
-import { redirectToSpotifyAuth } from "../../utils/SpotifyAuth";
 
 function App() {
   const [playlistName, setPlaylistName] = useState("My Playlist Name");
@@ -37,7 +36,7 @@ function App() {
   }
 
   function search(term) {
-    console.log(term)
+    console.log(term);
   }
 
   return (
