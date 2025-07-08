@@ -21,9 +21,9 @@ function SpotifyCallback() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code, codeVerifier }),
         });
-
-        const data = await response.JSON();
-
+        
+        const data = await response.json();
+        
         if (data.access_token) {
           sessionStorage.setItem("access_token", data.access_token);
           navigate("/");
@@ -37,7 +37,7 @@ function SpotifyCallback() {
 
     exchangeToken();
   }, [searchParams, navigate]);
-  
+
   return (
     <div>
       <p>Connecting to Spotify</p>

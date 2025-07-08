@@ -7,8 +7,10 @@ function AppRoutes() {
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="callback" element={<SpotifyCallback />} />
+        <Route path="/callback" element={<SpotifyCallback />} />
       </Routes>
     </Router>
   );
 }
+
+export default AppRoutes;

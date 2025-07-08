@@ -35,8 +35,8 @@ export async function redirectToSpotifyAuth() {
   const codeVerifier = generateRandomString(128);
   const codeChallenge = base64urlencode(await sha256(codeVerifier));
 
-  localStorage.setItem("code_verifier", codeVerifier);
-
+  sessionStorage.setItem("code_verifier", codeVerifier);
+  
   const authUrl = new URL("https://accounts.spotify.com/authorize");
   authUrl.searchParams.set("response_type", "code");
   authUrl.searchParams.set("client_id", clientId);
