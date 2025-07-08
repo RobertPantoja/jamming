@@ -22,7 +22,7 @@ async function sha256(plain) {
   return digest;
 }
 
-export async function redirectToSpotifyAuth() {
+async function redirectToSpotifyAuth() {
   const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const redirectUri = "http://127.0.0.1:3000/callback";
   const scope = [
@@ -36,7 +36,7 @@ export async function redirectToSpotifyAuth() {
   const codeChallenge = base64urlencode(await sha256(codeVerifier));
 
   sessionStorage.setItem("code_verifier", codeVerifier);
-  
+
   const authUrl = new URL("https://accounts.spotify.com/authorize");
   authUrl.searchParams.set("response_type", "code");
   authUrl.searchParams.set("client_id", clientId);
@@ -47,3 +47,5 @@ export async function redirectToSpotifyAuth() {
 
   window.location.href = authUrl.toString();
 }
+
+export default redirectToSpotifyAuth;
