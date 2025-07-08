@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SpotifyCallback from "../Callback/SpotifyCallback";
-import App from "../App/App";
+import SpotifyCallback from "../Pages/SpotifyCallback";
+import App from "../Pages/App";
 
 function AppRoutes() {
   return (

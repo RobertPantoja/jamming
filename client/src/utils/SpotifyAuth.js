@@ -24,7 +24,7 @@ async function sha256(plain) {
 
 async function redirectToSpotifyAuth() {
   const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-  const redirectUri = "http://127.0.0.1:3000/callback";
+  const redirectUri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
   const scope = [
     "playlist-modify-public",
     "playlist-modify-private",

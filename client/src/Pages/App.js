@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
-import SearchBar from "../Searchbar/SearchBar";
-import SearchResults from "../SearchResults/SearchResults";
-import Playlist from "../Playlist/Playlist";
+import SearchBar from "../Components/Searchbar/SearchBar";
+import SearchResults from "../Components/SearchResults/SearchResults";
+import Playlist from "../Components/Playlist/Playlist";
 
-import redirectToSpotifyAuth from "../../utils/SpotifyAuth";
-import mockSearchResults from "../../mocks/mockSearchResults";
-import mockPlaylistTracks from "../../mocks/mockPlaylistTracks";
+import redirectToSpotifyAuth from "../utils/SpotifyAuth";
+import mockSearchResults from "../mocks/mockSearchResults";
+import mockPlaylistTracks from "../mocks/mockPlaylistTracks";
 
 function App() {
   const [playlistName, setPlaylistName] = useState("My Playlist Name");
