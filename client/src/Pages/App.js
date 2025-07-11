@@ -4,6 +4,7 @@ import "./App.css";
 import SearchBar from "../Components/Searchbar/SearchBar";
 import SearchResults from "../Components/SearchResults/SearchResults";
 import Playlist from "../Components/Playlist/Playlist";
+import UserProfile from "../Components/UserProfile/UserProfile";
 
 import redirectToSpotifyAuth from "../utils/SpotifyAuth";
 import mockSearchResults from "../mocks/mockSearchResults";
@@ -13,8 +14,6 @@ function App() {
   const [playlistName, setPlaylistName] = useState("My Playlist Name");
   const [searchResults, setSearchResults] = useState(mockSearchResults);
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
-
-  const accessToken = sessionStorage.getItem("access_token");
 
   function addTrack(track) {
     if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
@@ -42,14 +41,20 @@ function App() {
     console.log(term);
   }
 
-  if (!accessToken) {
+  if (!sessionStorage.getItem("access_token")) {
     return (
       <div>
-        <h1>
-          Ja<span className="highlight">mm</span>ing
-        </h1>
+        <div className="Header">
+          <h1>
+            Ja<span className="highlight">mm</span>ing
+          </h1>
+        </div>
         <div className="App">
-          <button onClick={redirectToSpotifyAuth}>LOGIN TO SPOTIFY</button>
+          <div className="Login-section">
+            <button className="LoginButton" onClick={redirectToSpotifyAuth}>
+              LOGIN TO SPOTIFY
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -57,9 +62,12 @@ function App() {
 
   return (
     <div>
-      <h1>
-        Ja<span className="highlight">mm</span>ing
-      </h1>
+      <div className="Header">
+        <h1>
+          Ja<span className="highlight">mm</span>ing
+        </h1>
+        <UserProfile />
+      </div>
       <div className="App">
         <SearchBar onSearch={search} />
         <div className="App-playlist">
