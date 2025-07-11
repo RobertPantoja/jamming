@@ -28,6 +28,7 @@ async function redirectToSpotifyAuth() {
   const scope = [
     "playlist-modify-public",
     "playlist-modify-private",
+    "playlist-read-private",
     "user-read-private",
     "user-read-email",
   ].join(" ");

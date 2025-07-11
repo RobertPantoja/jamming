@@ -15,3 +15,15 @@ export async function getCurrentUserProfile() {
     email: data.email,
   };
 }
+
+export async function getUserPlaylist(limit = 25) {
+  const response = await fetchWithSpotifyToken(
+    `https://api.spotify.com/v1/me/playlists?limit=${limit}`
+  );
+
+  if (!response.ok) throw new Error("Failed to load playlists");
+
+  const data = await response.json();
+
+  console.log(data);
+}
