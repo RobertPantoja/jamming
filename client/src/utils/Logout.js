@@ -2,9 +2,13 @@ async function SpotifyLogout() {
   sessionStorage.removeItem("access_token");
   sessionStorage.removeItem("code_verifier");
 
-  const response = await fetch("api/logout", {
-    method: "POST",
-  });
+  try {
+    await fetch("api/logout", {
+      method: "POST",
+    });
+  } catch (error) {
+    console.error("Log Out Error:", error);
+  }
   window.location.href = "/";
 }
 
