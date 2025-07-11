@@ -1,0 +1,21 @@
+.Profile {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.Profile-name {
+  color: #ffff;
+  font-family: "Poppins", sans-serif;
+  padding: 16px;
+}
+
+.Profile-image {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}

@@ -46,11 +46,17 @@ function App() {
   if (!accessToken) {
     return (
       <div>
-        <h1>
-          Ja<span className="highlight">mm</span>ing
-        </h1>
+        <div className="Header">
+          <h1>
+            Ja<span className="highlight">mm</span>ing
+          </h1>
+        </div>
         <div className="App">
-          <button onClick={redirectToSpotifyAuth}>LOGIN TO SPOTIFY</button>
+          <div className="Login-section">
+            <button className="LoginButton" onClick={redirectToSpotifyAuth}>
+              LOGIN TO SPOTIFY
+            </button>
+          </div>
         </div>
       </div>
     );

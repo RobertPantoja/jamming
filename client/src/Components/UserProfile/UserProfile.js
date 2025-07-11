@@ -17,9 +17,9 @@ function UserProfile() {
 
   return (
     <div className="Profile">
-      <h2 className="Profile-name">{profile.name}</h2>
+      <h3 className="Profile-name">{profile.name}</h3>
       {profile.image && (
-        <img src={profile.image} alt="Profile" width={100} className="image" />
+        <img src={profile.image} alt="Profile" width={100} className="Profile-image" />
       )}
     </div>
   );
