@@ -4,7 +4,6 @@ import TrackList from "../TrackList/TrackList";
 function Playlist({
   playlists = [],
   playlistId,
-  playlistName,
   playlistTracks,
   onSelectPlaylist,
   onNameChange,
@@ -22,7 +21,7 @@ function Playlist({
 
   return (
     <div className="Playlist">
-      <select value={playlistId} onChange={handleSelectChange}>
+      <select value={playlistId} onChange={handleSelectChange} className="Playlist-select">
         <option value="">New Playlist</option>
         {playlists.map((p) => (
           <option key={p.id} value={p.id}>
@@ -30,6 +29,7 @@ function Playlist({
           </option>
         ))}
       </select>
+
       <TrackList tracks={playlistTracks} isRemoval={true} onRemove={onRemove} />
       <button className="Playlist-save" onClick={onSave}>
         SAVE TO SPOTIFY
