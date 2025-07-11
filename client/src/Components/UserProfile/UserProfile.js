@@ -7,11 +7,21 @@ function UserProfile() {
   const [showDropdown, setShowDropdown] = useState(null);
   const dropdownRef = useRef();
 
-  const toggleDropdown = () => setShowDropdown((prev) => !prev);
-
   useEffect(() => {
     getCurrentUserProfile().then(setProfile).catch(console.error);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDropdown = () => setShowDropdown((prev) => !prev);
 
   if (!profile)
     return (
@@ -21,14 +31,17 @@ function UserProfile() {
     );
 
   return (
-    <div className="Profile" onClick={toggleDropdown}>
-      <h3 className="Profile-name">{profile.name}</h3>
+    <div className="Profile" ref={dropdownRef}>
+      <h3 className="Profile-name" onClick={toggleDropdown}>
+        {profile.name}
+      </h3>
       {profile.image && (
         <img
           src={profile.image}
           alt="Profile"
           width={100}
           className="Profile-image"
+          onClick={toggleDropdown}
         />
       )}
       {showDropdown && (
