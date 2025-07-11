@@ -1,15 +1,15 @@
-async function fetchWithSpotifyToken(url, options = {}) {
+export async function fetchWithSpotifyToken(url, options = {}) {
   let token = sessionStorage.getItem("access_token");
 
   const response = await fetch(url, {
     ...options,
     headers: {
       ...options.headers,
-      Authorization: `Bearer${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
-  if ((response.status = 401)) {
+  if ((response.status === 401)) {
     const refreshResponse = await fetch("api/refresh", {
       method: "POST",
     });
@@ -33,5 +33,3 @@ async function fetchWithSpotifyToken(url, options = {}) {
 
   return response;
 }
-
-export default fetchWithSpotifyToken;

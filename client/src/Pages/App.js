@@ -4,6 +4,7 @@ import "./App.css";
 import SearchBar from "../Components/Searchbar/SearchBar";
 import SearchResults from "../Components/SearchResults/SearchResults";
 import Playlist from "../Components/Playlist/Playlist";
+import UserProfile from "../Components/UserProfile/UserProfile";
 
 import redirectToSpotifyAuth from "../utils/SpotifyAuth";
 import mockSearchResults from "../mocks/mockSearchResults";
@@ -57,9 +58,12 @@ function App() {
 
   return (
     <div>
-      <h1>
-        Ja<span className="highlight">mm</span>ing
-      </h1>
+      <div className="Header">
+        <h1>
+          Ja<span className="highlight">mm</span>ing
+        </h1>
+        <UserProfile />
+      </div>
       <div className="App">
         <SearchBar onSearch={search} />
         <div className="App-playlist">
