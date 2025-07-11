@@ -15,8 +15,6 @@ function App() {
   const [searchResults, setSearchResults] = useState(mockSearchResults);
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
 
-  const accessToken = sessionStorage.getItem("access_token");
-
   function addTrack(track) {
     if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
       return;
@@ -43,7 +41,7 @@ function App() {
     console.log(term);
   }
 
-  if (!accessToken) {
+  if (!sessionStorage.getItem("access_token")) {
     return (
       <div>
         <div className="Header">

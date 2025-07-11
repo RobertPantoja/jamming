@@ -87,4 +87,10 @@ router.post("/api/refresh", async (req, res) => {
   }
 });
 
+router.post("api/logout", (req, res) => {
+  const userKey = req.ip;
+  tokenStore.delete(userKey);
+  res.status(200).json({ success: true });
+});
+
 module.exports = router;

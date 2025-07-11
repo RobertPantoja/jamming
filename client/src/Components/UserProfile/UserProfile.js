@@ -1,6 +1,7 @@
 import "./UserProfile.css";
 import { useState, useEffect, useRef } from "react";
 import { getCurrentUserProfile } from "../../services/SpotifyService";
+import SpotifyLogout from "../../utils/Logout";
 
 function UserProfile() {
   const [profile, setProfile] = useState(null);
@@ -47,10 +48,7 @@ function UserProfile() {
       {showDropdown && (
         <div className="Profile-dropdown">
           <p className="Profile-email">{profile.email}</p>
-          <button
-            className="Logout-button"
-            onClick={() => alert("Logging out...")}
-          >
+          <button className="Logout-button" onClick={SpotifyLogout}>
             LOG OUT
           </button>
         </div>
