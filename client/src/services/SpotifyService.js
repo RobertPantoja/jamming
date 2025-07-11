@@ -14,7 +14,7 @@ export async function getCurrentUserProfile() {
   };
 }
 
-export async function getUserPlaylist(limit = 25) {
+export async function getUserPlaylists(limit = 25) {
   const response = await fetchWithSpotifyToken(
     `https://api.spotify.com/v1/me/playlists?limit=${limit}`
   );

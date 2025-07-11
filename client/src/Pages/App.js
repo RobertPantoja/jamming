@@ -6,14 +6,18 @@ import SearchResults from "../Components/SearchResults/SearchResults";
 import Playlist from "../Components/Playlist/Playlist";
 import UserProfile from "../Components/UserProfile/UserProfile";
 
-import redirectToSpotifyAuth from "../utils/SpotifyAuth";
+import { redirectToSpotifyAuth } from "../utils/SpotifyAuth";
+import { getUserPlaylists } from "../services/SpotifyService";
+
 import mockSearchResults from "../mocks/mockSearchResults";
 import mockPlaylistTracks from "../mocks/mockPlaylistTracks";
 
 function App() {
-  const [playlistName, setPlaylistName] = useState("My Playlist Name");
-  const [searchResults, setSearchResults] = useState(mockSearchResults);
+  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useState("");
+  const [playlistName, setPlaylistName] = useState("My Playlist");
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
+  const [searchResults, setSearchResults] = useState(mockSearchResults);
 
   function addTrack(track) {
     if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
@@ -26,6 +30,23 @@ function App() {
   function removeTrack(track) {
     const filteredTracks = playlistTracks.filter((t) => t.id !== track.id);
     setPlaylistTracks(filteredTracks);
+  }
+
+  useEffect(() => {
+    getUserPlaylists().then(setUserPlaylists).catch(console.error);
+  }, []);
+
+  function handleSelectPlaylist(id) {
+    setPlaylistId(id);
+
+    if (id === "") {
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+    } else {
+      const selected = userPlaylists.find((pl) => pl.id === id);
+      setPlaylistName(selected?.name ?? "Selected Playlist");
+      console.log(playlistTracks);
+    }
   }
 
   function updatePlaylistName(name) {
@@ -73,10 +94,13 @@ function App() {
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
+            playlists={userPlaylists}
+            playlistId={playlistId}
             playlistName={playlistName}
             playlistTracks={playlistTracks}
-            onRemove={removeTrack}
+            onSelectPlaylist={handleSelectPlaylist}
             onNameChange={updatePlaylistName}
+            onRemove={removeTrack}
             onSave={savePlaylist}
           />
         </div>

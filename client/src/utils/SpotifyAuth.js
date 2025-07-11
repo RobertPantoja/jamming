@@ -22,7 +22,7 @@ async function sha256(plain) {
   return digest;
 }
 
-async function redirectToSpotifyAuth() {
+export async function redirectToSpotifyAuth() {
   const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const redirectUri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
   const scope = [
@@ -48,5 +48,3 @@ async function redirectToSpotifyAuth() {
 
   window.location.href = authUrl.toString();
 }
-
-export default redirectToSpotifyAuth;

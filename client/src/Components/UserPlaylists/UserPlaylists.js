@@ -16,7 +16,6 @@ function UserPlaylists() {
 
   return (
     <div>
-      <label htmlFor="playlist">Select Playlist:</label>
       <select id="playlist" value={selectedId} onChange={handleChange}>
         <option value="" disabled>
           Select one

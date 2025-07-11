@@ -1,16 +1,39 @@
 import "./Playlist.css";
 import TrackList from "../TrackList/TrackList";
 
-function Playlist({ playlistName, playlistTracks, onRemove, onNameChange, onSave }) {
+function Playlist({
+  playlists = [],
+  playlistId,
+  playlistName,
+  playlistTracks,
+  onSelectPlaylist,
+  onNameChange,
+  onRemove,
+  onSave,
+}) {
   function handleNameChange(event) {
-    onNameChange(event.target.value)
+    onNameChange(event.target.value);
+  }
+
+  function handleSelectChange(event) {
+    const selectedId = event.target.value;
+    onSelectPlaylist(selectedId);
   }
 
   return (
     <div className="Playlist">
-      <input value={playlistName} onChange={handleNameChange}/>
-      <TrackList tracks={playlistTracks} isRemoval={true} onRemove={onRemove}/>
-      <button className="Playlist-save" onClick={onSave}>SAVE TO SPOTIFY</button>
+      <select value={playlistId} onChange={handleSelectChange}>
+        <option value="">New Playlist</option>
+        {playlists.map((p) => (
+          <option key={p.id} value={p.id}>
+            {p.name}
+          </option>
+        ))}
+      </select>
+      <TrackList tracks={playlistTracks} isRemoval={true} onRemove={onRemove} />
+      <button className="Playlist-save" onClick={onSave}>
+        SAVE TO SPOTIFY
+      </button>
     </div>
   );
 }
