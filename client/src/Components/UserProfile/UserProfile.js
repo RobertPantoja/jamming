@@ -1,9 +1,14 @@
 import "./UserProfile.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getCurrentUserProfile } from "../../services/SpotifyService";
 
 function UserProfile() {
   const [profile, setProfile] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(null);
+  const dropdownRef = useRef();
+
+  const toggleDropdown = () => setShowDropdown((prev) => !prev);
+
   useEffect(() => {
     getCurrentUserProfile().then(setProfile).catch(console.error);
   }, []);
@@ -16,10 +21,26 @@ function UserProfile() {
     );
 
   return (
-    <div className="Profile">
+    <div className="Profile" onClick={toggleDropdown}>
       <h3 className="Profile-name">{profile.name}</h3>
       {profile.image && (
-        <img src={profile.image} alt="Profile" width={100} className="Profile-image" />
+        <img
+          src={profile.image}
+          alt="Profile"
+          width={100}
+          className="Profile-image"
+        />
+      )}
+      {showDropdown && (
+        <div className="Profile-dropdown">
+          <p className="Profile-email">{profile.email}</p>
+          <button
+            className="Logout-button"
+            onClick={() => alert("Logging out...")}
+          >
+            LOG OUT
+          </button>
+        </div>
       )}
     </div>
   );

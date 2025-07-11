@@ -11,6 +11,7 @@
   color: #ffff;
   font-family: "Poppins", sans-serif;
   padding: 16px;
+  cursor: pointer;
 }
 
 .Profile-image {
@@ -18,4 +19,45 @@
   max-height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
+}
+
+.Profile-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: rgba(1, 12, 63, 0.7);
+  box-shadow: 0 2px 2px 2px #000000;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.Profile-email {
+  font-size: 16px;
+  color: #fff;
+  padding: 16px;
+}
+
+.Logout-button {
+  padding: 8px 12px;
+  background-color: #6c41ec;
+  color: #fff;
+  border: none;
+  border-radius: 54px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 16px;
+}
+
+.Logout-button:hover {
+  background-color: rgba(108, 65, 233, 0.7);
+}
+
+@media only screen and (max-width: 700px) {
+  .Profile-name {
+    display: none;
+  }
 }
