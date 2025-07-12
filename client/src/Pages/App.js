@@ -55,7 +55,7 @@ function App() {
 
   if (!sessionStorage.getItem("access_token")) {
     return (
-      <div>
+      <div className="Home">
         <div className="Header">
           <h1>
             Ja<span className="highlight">mm</span>ing
@@ -73,7 +73,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="Home">
       <div className="Header">
         <h1>
           Ja<span className="highlight">mm</span>ing

@@ -3,22 +3,26 @@
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  width: 37%;
-  max-height: 950px;
-  padding: 2.27rem 1.16rem;
+  width: 56vh;
+  min-height: 16vh;
+  max-height: 80vh;
+  padding: 2vh;
   background-color: rgba(1, 12, 63, 0.7);
   box-shadow: 0 4px 2px 2px #000000;
 }
 
-.Playlist input, select {
+.Playlist-select {
+  border: 2px solid red;
   width: 100%;
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid #6f6f6f;
+  border-bottom: 2px solid #6f6f6f;
   font-family: "Poppins", sans-serif;
-  font-size: 1.55rem;
+  font-weight: 500;
+  font-size: 1.6rem;
   color: #fff;
+  padding-bottom: 1vh;
 }
 
 .Playlist-save {
