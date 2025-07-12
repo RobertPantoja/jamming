@@ -3,9 +3,8 @@
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  width: 56vh;
-  min-height: 16vh;
-  max-height: 80vh;
+  width: 50vh;
+  max-height: 60vh;
   padding: 2vh;
   background-color: rgba(1, 12, 63, 0.7);
   box-shadow: 0 4px 2px 2px #000000;

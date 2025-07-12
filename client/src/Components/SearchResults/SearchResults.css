@@ -1,7 +1,6 @@
 .SearchResults {
-  width: 56vh;
-  min-height: 16vh;
-  max-height: 80vh;
+  max-height: 60vh;
+  width: 50vh;
   overflow-y: scroll;
   padding: 2vh;
   background-color: rgba(1, 12, 63, 0.7);

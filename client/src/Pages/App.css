@@ -32,7 +32,7 @@ h2 {
 
 .App {
   flex: 1;
-  padding: 8vh;
+  padding: 4vh 8vh;
   background-image: url("../assets/background_photo_desktop.jpg");
   background-size: cover;
   background-position: center;
