@@ -7,17 +7,16 @@ import Playlist from "../Components/Playlist/Playlist";
 import UserProfile from "../Components/UserProfile/UserProfile";
 
 import { redirectToSpotifyAuth } from "../utils/SpotifyAuth";
-import { getUserPlaylists } from "../services/SpotifyService";
-
-import mockSearchResults from "../mocks/mockSearchResults";
-import mockPlaylistTracks from "../mocks/mockPlaylistTracks";
+import {
+  getUserPlaylists,
+  getPlaylistTracks,
+} from "../services/SpotifyService";
 
 function App() {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useState("");
-  const [playlistName, setPlaylistName] = useState("My Playlist");
-  const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
-  const [searchResults, setSearchResults] = useState(mockSearchResults);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   function addTrack(track) {
     if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
@@ -38,19 +37,11 @@ function App() {
 
   function handleSelectPlaylist(id) {
     setPlaylistId(id);
-
     if (id === "") {
-      setPlaylistName("New Playlist");
       setPlaylistTracks([]);
     } else {
-      const selected = userPlaylists.find((pl) => pl.id === id);
-      setPlaylistName(selected?.name ?? "Selected Playlist");
-      console.log(playlistTracks);
+      getPlaylistTracks(id).then(setPlaylistTracks).catch(console.error);
     }
-  }
-
-  function updatePlaylistName(name) {
-    setPlaylistName(name);
   }
 
   function savePlaylist() {
@@ -96,10 +87,8 @@ function App() {
           <Playlist
             playlists={userPlaylists}
             playlistId={playlistId}
-            playlistName={playlistName}
             playlistTracks={playlistTracks}
             onSelectPlaylist={handleSelectPlaylist}
-            onNameChange={updatePlaylistName}
             onRemove={removeTrack}
             onSave={savePlaylist}
           />

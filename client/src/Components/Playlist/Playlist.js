@@ -10,10 +10,6 @@ function Playlist({
   onRemove,
   onSave,
 }) {
-  function handleNameChange(event) {
-    onNameChange(event.target.value);
-  }
-
   function handleSelectChange(event) {
     const selectedId = event.target.value;
     onSelectPlaylist(selectedId);
@@ -22,7 +18,6 @@ function Playlist({
   return (
     <div className="Playlist">
       <select value={playlistId} onChange={handleSelectChange} className="Playlist-select">
-        <option value="">New Playlist</option>
         {playlists.map((p) => (
           <option key={p.id} value={p.id}>
             {p.name}
