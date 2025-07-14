@@ -46,23 +46,22 @@ function App() {
     setPlaylistTracks(filteredTracks);
   }
 
-  async function savePlaylist() {
-    try {
-      const trackURIs = playlistTracks.map((track) => track.uri);
-      if (playlistId) {
-        await updateSpotifyPlaylist(playlistId, trackURIs);
-        alert("Playlist Updated Succesfully!");
-      } else {
-        alert("No playlist selected");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Failed to save playlist: " + error.message);
+  function savePlaylist() {
+    const trackURIs = playlistTracks.map((track) => track.uri);
+    if (playlistId) {
+      updateSpotifyPlaylist(playlistId, trackURIs);
+      alert("Playlist Updated Succesfully!");
+    } else {
+      alert("No playlist selected");
     }
   }
 
   function search(term) {
-    searchSpotifyItems(term);
+    if (term) {
+      searchSpotifyItems(term).then(setSearchResults).catch(console.error);
+    } else {
+      alert("No term in Search Bar");
+    }
   }
 
   if (!sessionStorage.getItem("access_token")) {

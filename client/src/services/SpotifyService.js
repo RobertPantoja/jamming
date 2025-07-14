@@ -86,8 +86,6 @@ export async function searchSpotifyItems(term, limit = 10) {
 
   const data = await response.json();
 
-  console.log(data.tracks);
-
   return data.tracks.items.map((track) => ({
     id: track.id,
     name: track.name,
