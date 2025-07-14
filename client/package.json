@@ -1,7 +1,4 @@
 {
-  "name": "spotify",
-  "version": "0.1.0",
-  "private": true,
   "proxy": "http://127.0.0.1:3010/",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
