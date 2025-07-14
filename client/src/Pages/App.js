@@ -11,6 +11,7 @@ import {
   getUserPlaylists,
   getPlaylistTracks,
   updateSpotifyPlaylist,
+  searchSpotifyItems,
 } from "../services/SpotifyService";
 
 function App() {
@@ -18,19 +19,6 @@ function App() {
   const [playlistId, setPlaylistId] = useState("");
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
-  function addTrack(track) {
-    if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
-      return;
-    } else {
-      setPlaylistTracks((playlistTracks) => [...playlistTracks, track]);
-    }
-  }
-
-  function removeTrack(track) {
-    const filteredTracks = playlistTracks.filter((t) => t.id !== track.id);
-    setPlaylistTracks(filteredTracks);
-  }
 
   useEffect(() => {
     getUserPlaylists().then(setPlaylists).catch(console.error);
@@ -43,6 +31,19 @@ function App() {
     } else {
       getPlaylistTracks(id).then(setPlaylistTracks).catch(console.error);
     }
+  }
+
+  function addTrack(track) {
+    if (playlistTracks.find((t) => t.id === track.id)) {
+      return;
+    } else {
+      setPlaylistTracks((playlistTracks) => [...playlistTracks, track]);
+    }
+  }
+
+  function removeTrack(track) {
+    const filteredTracks = playlistTracks.filter((t) => t.id !== track.id);
+    setPlaylistTracks(filteredTracks);
   }
 
   async function savePlaylist() {
@@ -61,7 +62,7 @@ function App() {
   }
 
   function search(term) {
-    console.log(term);
+    searchSpotifyItems(term);
   }
 
   if (!sessionStorage.getItem("access_token")) {
