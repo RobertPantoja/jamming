@@ -6,7 +6,6 @@ function Playlist({
   playlistId,
   playlistTracks,
   onSelectPlaylist,
-  onNameChange,
   onRemove,
   onSave,
 }) {
