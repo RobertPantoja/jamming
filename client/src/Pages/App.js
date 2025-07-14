@@ -6,14 +6,18 @@ import SearchResults from "../Components/SearchResults/SearchResults";
 import Playlist from "../Components/Playlist/Playlist";
 import UserProfile from "../Components/UserProfile/UserProfile";
 
-import redirectToSpotifyAuth from "../utils/SpotifyAuth";
-import mockSearchResults from "../mocks/mockSearchResults";
-import mockPlaylistTracks from "../mocks/mockPlaylistTracks";
+import { redirectToSpotifyAuth } from "../utils/SpotifyAuth";
+import {
+  getUserPlaylists,
+  getPlaylistTracks,
+  updateSpotifyPlaylist,
+} from "../services/SpotifyService";
 
 function App() {
-  const [playlistName, setPlaylistName] = useState("My Playlist Name");
-  const [searchResults, setSearchResults] = useState(mockSearchResults);
-  const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
+  const [playlists, setPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useState("");
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   function addTrack(track) {
     if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
@@ -28,13 +32,32 @@ function App() {
     setPlaylistTracks(filteredTracks);
   }
 
-  function updatePlaylistName(name) {
-    setPlaylistName(name);
+  useEffect(() => {
+    getUserPlaylists().then(setPlaylists).catch(console.error);
+  }, []);
+
+  function handleSelectPlaylist(id) {
+    setPlaylistId(id);
+    if (id === "") {
+      setPlaylistTracks([]);
+    } else {
+      getPlaylistTracks(id).then(setPlaylistTracks).catch(console.error);
+    }
   }
 
-  function savePlaylist() {
-    const trackURIs = playlistTracks.map((track) => track.uri);
-    console.log(trackURIs);
+  async function savePlaylist() {
+    try {
+      const trackURIs = playlistTracks.map((track) => track.uri);
+      if (playlistId) {
+        await updateSpotifyPlaylist(playlistId, trackURIs);
+        alert("Playlist Updated Succesfully!");
+      } else {
+        alert("No playlist selected");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save playlist: " + error.message);
+    }
   }
 
   function search(term) {
@@ -43,7 +66,7 @@ function App() {
 
   if (!sessionStorage.getItem("access_token")) {
     return (
-      <div>
+      <div className="Home">
         <div className="Header">
           <h1>
             Ja<span className="highlight">mm</span>ing
@@ -61,7 +84,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="Home">
       <div className="Header">
         <h1>
           Ja<span className="highlight">mm</span>ing
@@ -73,10 +96,11 @@ function App() {
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
-            playlistName={playlistName}
+            playlists={playlists}
+            playlistId={playlistId}
             playlistTracks={playlistTracks}
+            onSelectPlaylist={handleSelectPlaylist}
             onRemove={removeTrack}
-            onNameChange={updatePlaylistName}
             onSave={savePlaylist}
           />
         </div>
