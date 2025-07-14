@@ -17,6 +17,8 @@ Jamming is a React + Express web application that allows users to search for tra
 
 ## 📷 Demo
 
+<img width="1800" height="1079" alt="jamming" src="https://github.com/user-attachments/assets/48d0180c-7b16-4be1-aae1-9e5959541dfc" />
+
 ---
 
 ## 🧱 Tech Stack
