@@ -13,7 +13,7 @@ import {
 } from "../services/SpotifyService";
 
 function App() {
-  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useState("");
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -32,7 +32,7 @@ function App() {
   }
 
   useEffect(() => {
-    getUserPlaylists().then(setUserPlaylists).catch(console.error);
+    getUserPlaylists().then(setPlaylists).catch(console.error);
   }, []);
 
   function handleSelectPlaylist(id) {
@@ -85,7 +85,7 @@ function App() {
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
-            playlists={userPlaylists}
+            playlists={playlists}
             playlistId={playlistId}
             playlistTracks={playlistTracks}
             onSelectPlaylist={handleSelectPlaylist}

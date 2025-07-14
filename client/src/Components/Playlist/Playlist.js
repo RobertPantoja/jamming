@@ -17,7 +17,14 @@ function Playlist({
 
   return (
     <div className="Playlist">
-      <select value={playlistId} onChange={handleSelectChange} className="Playlist-select">
+      <select
+        value={playlistId}
+        onChange={handleSelectChange}
+        className="Playlist-select"
+      >
+        <option value="" disabled hidden>
+          Select a Playlist
+        </option>
         {playlists.map((p) => (
           <option key={p.id} value={p.id}>
             {p.name}
