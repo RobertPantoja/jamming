@@ -11,6 +11,7 @@ import {
   getUserPlaylists,
   getPlaylistTracks,
   updateSpotifyPlaylist,
+  searchSpotifyItems,
 } from "../services/SpotifyService";
 
 function App() {
@@ -18,19 +19,6 @@ function App() {
   const [playlistId, setPlaylistId] = useState("");
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
-  function addTrack(track) {
-    if (playlistTracks.find((savedTack) => savedTack.id === track.id)) {
-      return;
-    } else {
-      setPlaylistTracks((playlistTracks) => [...playlistTracks, track]);
-    }
-  }
-
-  function removeTrack(track) {
-    const filteredTracks = playlistTracks.filter((t) => t.id !== track.id);
-    setPlaylistTracks(filteredTracks);
-  }
 
   useEffect(() => {
     getUserPlaylists().then(setPlaylists).catch(console.error);
@@ -45,23 +33,39 @@ function App() {
     }
   }
 
-  async function savePlaylist() {
-    try {
-      const trackURIs = playlistTracks.map((track) => track.uri);
-      if (playlistId) {
-        await updateSpotifyPlaylist(playlistId, trackURIs);
-        alert("Playlist Updated Succesfully!");
-      } else {
-        alert("No playlist selected");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Failed to save playlist: " + error.message);
+  function addTrack(track) {
+    if (playlistTracks.find((t) => t.id === track.id) || !playlistId) {
+      return;
+    } else {
+      setPlaylistTracks((playlistTracks) => [...playlistTracks, track]);
+    }
+  }
+
+  function removeTrack(track) {
+    const filteredTracks = playlistTracks.filter((t) => t.id !== track.id);
+    setPlaylistTracks(filteredTracks);
+  }
+
+  function savePlaylist() {
+    const trackURIs = playlistTracks.map((track) => track.uri);
+    if (trackURIs.length >= 100) {
+      alert("Can't save playlists with more than 100 tracks");
+      return;
+    }
+    if (playlistId) {
+      updateSpotifyPlaylist(playlistId, trackURIs);
+      alert("Playlist Updated Succesfully!");
+    } else {
+      alert("No playlist selected");
     }
   }
 
   function search(term) {
-    console.log(term);
+    if (term) {
+      searchSpotifyItems(term).then(setSearchResults).catch(console.error);
+    } else {
+      alert("No term in Search Bar");
+    }
   }
 
   if (!sessionStorage.getItem("access_token")) {

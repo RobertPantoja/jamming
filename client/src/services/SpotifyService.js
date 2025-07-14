@@ -52,7 +52,7 @@ export async function getPlaylistTracks(playlistid) {
     id: track.track.id,
     name: track.track.name,
     album: track.track.album.name,
-    artist: track.track.artists.map((a) => a.name).join(" & "),
+    artist: track.track.artists.map((a) => a.name).join(", "),
     image: track.track.album.images[0]?.url || null,
     uri: track.track.uri,
   }));
@@ -72,4 +72,25 @@ export async function updateSpotifyPlaylist(playlistId, trackURIs) {
     throw new Error(
       "Failed to update playlist" + (await response.json().error.message)
     );
+}
+
+export async function searchSpotifyItems(term, limit = 10) {
+  const response = await fetchWithSpotifyToken(
+    `https://api.spotify.com/v1/search?q=${term}&type=track&limit=${limit}`
+  );
+
+  if (!response.ok)
+    throw new Error(
+      "Failed to search for term" + (await response.json().error.message)
+    );
+
+  const data = await response.json();
+
+  return data.tracks.items.map((track) => ({
+    id: track.id,
+    name: track.name,
+    artist: track.artists.map((a) => a.name).join(", "),
+    album: track.album.name,
+    uri: track.uri,
+  }));
 }
