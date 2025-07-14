@@ -48,6 +48,10 @@ function App() {
 
   function savePlaylist() {
     const trackURIs = playlistTracks.map((track) => track.uri);
+    if (trackURIs.length >= 100) {
+      alert("Can't save playlists with more than 100 tracks");
+      return;
+    }
     if (playlistId) {
       updateSpotifyPlaylist(playlistId, trackURIs);
       alert("Playlist Updated Succesfully!");
