@@ -34,7 +34,7 @@ function App() {
   }
 
   function addTrack(track) {
-    if (playlistTracks.find((t) => t.id === track.id)) {
+    if (playlistTracks.find((t) => t.id === track.id) || !playlistId) {
       return;
     } else {
       setPlaylistTracks((playlistTracks) => [...playlistTracks, track]);
