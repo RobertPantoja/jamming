@@ -10,6 +10,7 @@ import { redirectToSpotifyAuth } from "../utils/SpotifyAuth";
 import {
   getUserPlaylists,
   getPlaylistTracks,
+  updateSpotifyPlaylist,
 } from "../services/SpotifyService";
 
 function App() {
@@ -44,9 +45,19 @@ function App() {
     }
   }
 
-  function savePlaylist() {
-    const trackURIs = playlistTracks.map((track) => track.uri);
-    console.log(trackURIs);
+  async function savePlaylist() {
+    try {
+      const trackURIs = playlistTracks.map((track) => track.uri);
+      if (playlistId) {
+        await updateSpotifyPlaylist(playlistId, trackURIs);
+        alert("Playlist Updated Succesfully!");
+      } else {
+        alert("No playlist selected");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save playlist: " + error.message);
+    }
   }
 
   function search(term) {

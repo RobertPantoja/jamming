@@ -3,7 +3,10 @@ import { fetchWithSpotifyToken } from "../utils/SpotifyApi";
 export async function getCurrentUserProfile() {
   const response = await fetchWithSpotifyToken("https://api.spotify.com/v1/me");
 
-  if (!response.ok) throw new Error("Failed to fetch user profile");
+  if (!response.ok)
+    throw new Error(
+      "Failed to fetch user profile" + (await response.json().error.message)
+    );
 
   const data = await response.json();
 
@@ -19,7 +22,10 @@ export async function getUserPlaylists(limit = 25) {
     `https://api.spotify.com/v1/me/playlists?limit=${limit}`
   );
 
-  if (!response.ok) throw new Error("Failed to load playlists");
+  if (!response.ok)
+    throw new Error(
+      "Failed to load playlists" + (await response.json().error.message)
+    );
 
   const data = await response.json();
 
@@ -35,7 +41,10 @@ export async function getPlaylistTracks(playlistid) {
     `https://api.spotify.com/v1/playlists/${playlistid}/tracks`
   );
 
-  if (!response.ok) throw new Error("Failed to get playlist tracks");
+  if (!response.ok)
+    throw new Error(
+      "Failed to get playlist tracks" + (await response.json().error.message)
+    );
 
   const data = await response.json();
 
@@ -45,6 +54,22 @@ export async function getPlaylistTracks(playlistid) {
     album: track.track.album.name,
     artist: track.track.artists.map((a) => a.name).join(" & "),
     image: track.track.album.images[0]?.url || null,
-    href: track.track.href,
+    uri: track.track.uri,
   }));
+}
+
+export async function updateSpotifyPlaylist(playlistId, trackURIs) {
+  const response = await fetchWithSpotifyToken(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uris: trackURIs }),
+    }
+  );
+
+  if (!response.ok)
+    throw new Error(
+      "Failed to update playlist" + (await response.json().error.message)
+    );
 }
