@@ -26,7 +26,7 @@ Jamming is a React + Express web application that allows users to search for tra
 - **Frontend:** React, React Router
 - **Backend:** Node.js, Express
 - **Auth:** Spotify OAuth 2.0 with PKCE
-- **Deployment-ready:** Fully works with environment variables and HTTPS
+- **Deployment-ready:** Fully works with environment variables
 
 ---
 
@@ -39,8 +39,8 @@ Add a Redirect URI: http://127.0.0.1:3000/callback (or change the port if you pr
 ### 2. Clone the repository
 
 ```bash
-git clone https://github.com/RobertPantoja/jammming.git
-cd jammming
+git clone https://github.com/RobertPantoja/jamming.git
+cd jamming
 ```
 
 ### 3. Create environment files
